@@ -64,9 +64,9 @@ CREATE  TABLE scheduler.taskcategories (
 
 INSERT INTO scheduler.taskcategories
 (taskcategoryname,createddate, active)
-select 'TREASURES FROM GOD’S WORD',  now(), 1 union
-select 'APPLY YOURSELF TO THE FIELD MINISTRY',  now(), 1 union
-select 'LIVING AS CHRISTIANS', now(), 1 ;
+select 'TFGW',  now(), 1 union
+select 'AYTTFM',  now(), 1 union
+select 'LAC', now(), 1 ;
 ;
 
 #---------------#
@@ -86,8 +86,8 @@ CREATE  TABLE scheduler.tasks (
 
 INSERT INTO scheduler.tasks
 (taskname, taskcategoryid, createddate,  active)
-select 'Digging for Spiritual Gems', 1, now(), 1 union
-select 'Bible Reading',  1, now(), 1 
+select 'DFSG', 1, now(), 1 union
+select 'BR',  1, now(), 1 
 ;
 
 #---------------#
@@ -130,8 +130,8 @@ FOREIGN KEY (genderid) REFERENCES scheduler.genders(genderid)
 
 INSERT INTO scheduler.persons
 (firstname, lastname, genderid, createddate,  active)
-select 'Aster', 'Eshetu', 2, now(), 1 union
-select 'Berhanu', 'Eshetu', 1, now(), 1 
+select 'Caesar', 'Nimrod', 2, now(), 1 union
+select 'Junta', 'Overthrown', 1, now(), 1 
 ;
 
 
@@ -150,7 +150,7 @@ CREATE  TABLE scheduler.buildings (
 
 INSERT INTO scheduler.buildings
 (buildingname, createddate,  active)
-select 'Kingdom Hall', now(), 1 
+select 'Arena Hall', now(), 1 
 ;
 
 #---------------#
@@ -168,5 +168,8 @@ CREATE  TABLE scheduler.rooms (
 
 INSERT INTO scheduler.rooms
 (roomname)
-select 'Main Hall'
+select 'Main Hall' union
+select 'Second Hall' union
+select 'Rainier' union
+select 'Mt Shazzam'
 ;
