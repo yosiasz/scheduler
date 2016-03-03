@@ -13,7 +13,7 @@ var mysql = require('mysql');
 
 
 module.exports = function(){
-    app.get('users/', function(req,res){
+    app.get('/users', function(req,res){
         connection.query('SELECT userid, username, firstname, lastname FROM users', req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
