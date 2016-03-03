@@ -22,19 +22,10 @@ var mysql = require('mysql'),
     cors = require('cors')
  
  
-/* app.use(session({
-  secret: 'harborwitnessing',
-  resave: false,
-  saveUninitialized: true
-})) */
-	
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//app.use(multer()); // for parsing multipart/form-data
-
 
  var connection = module.exports = mysql.createConnection({
     host: 'localhost',
@@ -44,48 +35,24 @@ app.use(bodyParser.urlencoded({ extended: true }));
     database: 'scheduler'
 });
 
-/* 
-
-var connection = mysql.createConnection({
-     host: config.host,
-     user: config.username,
-     password : config.password,
-     database: config.database
-}); 
-
- if(config.use_database==='true')
- {
- connection.connect();
- } 
- 
-console.log(connection);
-
- */
-
 var sess;
  
-//passport.authenticate('bearer'),
 
 app.all('*', function(req, res, next) {
     sess=req.session;
     res.header("Access-Control-Allow-Origin", "*");
-/*    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Headers', 'Accept');
-    res.header('Access-Control-Allow-Headers', 'Origin');*/
 	next();
  });
  
 var rooms = require('../routes/rooms/rooms.js');
-var buildings = require('../routes/buildings.js');
-//var users = require('../routes/users.js');
-//var persons = require('../routes/persons.js');
+var buildings = require('../routes/buildings/buildings.js');
+var persons = require('../routes/persons/persons.js');
+var users = require('../routes/users/users.js');
 
 app.use(rooms);
 app.use(buildings);
-
-//app.use(users);
-//app.use(persons);
+app.use(users);
+app.use(persons);
 
 app.listen(8001);
 

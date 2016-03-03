@@ -19,7 +19,7 @@ app.config(function ($routeProvider) {
             })
         .when('/buildings',
             {
-                controller: 'buildingsController',
+                //controller: 'buildingsController',
                 templateUrl: '/app/partials/buildings.html'
             })
         .when('/rooms',
