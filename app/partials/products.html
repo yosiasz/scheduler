@@ -1,0 +1,30 @@
+<div >
+    <form class="well">
+        <label>product Name</label>
+        <input type="text" name="productname" ng-model="newproduct.productname" />
+        <br/>
+        <input type="hidden" ng-model="newproduct.productid" />
+        <input type="button" value="Save" ng-click="insertproduct()" class="btn btn-primary" />
+    </form>
+	<div>
+        <label>Search product Name</label> 
+        <input type="text" name="productname" ng-model="searchText" />
+	</div>	
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>product Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in products | filter:searchText">
+                <td>{{ product.productname }}</td>
+                <td> 
+                    <a href="javascript:void(0)" ng-click="edit(product.productid)">edit</a> | 
+                    <a href="javascript:void(0)" ng-click="delete(product.productid)">delete</a>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

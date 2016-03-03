@@ -1,0 +1,35 @@
+<!doctype html>
+<html ng-app="schedulerApp">
+<head>    
+<title>Meeting Scheduler</title>
+</head>
+<body data-ng-cloak>
+<!--<div class="container">
+    <div class="navbar">
+        <ul class="nav">
+            <li><a href="./partials/header.html"</a>Create Stuff</li>
+        </ul>
+    </div>    
+</div>        
+<div>-->
+<div id="header" class="navbar" ng-include src="'./partials/header.html'"></div>	
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/customerManagementStyles.css">
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap-responsive.min.css">    
+
+<!--    
+    <link rel="stylesheet" type="text/css" href="./css/fullcalendar.css">	
+
+-->    
+    <link rel="icon" href="/css/images/favicon.ico" />
+    
+    <script src="./scripts/angular.js"></script>
+    <script src="./scripts/angular-route.js"></script>    
+    <script src="app.js"></script>
+	
+    <script src="./controllers/controllerFactory.js"></script>
+    <script src="./services/servicesFactory.js"></script>
+    <div ng-view=""></div>
+</body>
+</html>    

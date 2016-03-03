@@ -1,0 +1,32 @@
+<div >
+    <form class="well">
+        <label>First Name</label>
+        <input type="text" name="firstname" ng-model="newuser.firstname" />
+        <br/>
+        <label>Last Name</label>
+        <input type="text" name="lastname" ng-model="newuser.lastname" />
+        <br/>
+        <input type="hidden" ng-model="newuser.personid" />
+        <input type="button" value="Save" ng-click="insertUser()" class="btn btn-primary" />
+    </form>
+	<div>
+        <label>Search Person Name</label> 
+        <input type="text" name="firstname" ng-model="searchText" />
+	</div>	
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>User Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in users | filter:searchText">
+                <td>{{ user.firstname }} {{ user.lastname }}</td>
+                <td> 
+                    <a href="javascript:void(0)" ng-click="edit(user.userid)">edit</a> | 
+                    <a href="javascript:void(0)" ng-click="delete(user.userid)">delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

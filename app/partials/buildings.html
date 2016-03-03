@@ -1,0 +1,31 @@
+ <div ng-controller="buildingsController">
+    <form class="well">
+        <label>Building Name</label>
+        <input type="text" name="buildingname" ng-model="newbuilding.buildingname" />
+        <br/>
+        <input type="hidden" ng-model="newbuilding.buildingid" />
+        <input type="button" value="Save" ng-click="savebuilding()" class="btn btn-primary" />
+    </form>
+	<div>
+        <label>Search building Name</label> 
+        <input type="text" name="buildingname" ng-model="searchText" />
+	</div>
+	
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>building Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="building in buildings | filter:searchText">
+                <td>{{ building.buildingname }}</td>
+                <td> 
+                    <a href="javascript:void(0)" ng-click="edit(building.buildingid)">edit</a> | 
+                    <a href="javascript:void(0)" ng-click="delete(building.buildingid)">delete</a>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
