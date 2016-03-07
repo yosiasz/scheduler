@@ -16,6 +16,7 @@ var mysql = require('mysql'),
 //Looks to see if there is a body json and parses
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/partials'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
@@ -47,7 +48,7 @@ app.all('*', function(req, res, next) {
 	next();
  });
  
-var rooms = require('./routes/rooms/rooms.js')(connection);
+var rooms = require('./routes/rooms/roomRoutes.js')(connection);
 var buildings = require('./routes/buildings/buildings.js')(connection);
 var persons = require('./routes/persons/persons.js')(connection);
 var userRouter = require('./routes/persons/userRoutes')(connection);

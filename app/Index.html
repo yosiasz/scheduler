@@ -2,19 +2,52 @@
 <html ng-app="schedulerApp">
 <head>    
 <title>Meeting Scheduler</title>
-</head>
-<body data-ng-cloak>
-<div id="header" class="navbar" ng-include src="'./partials/header.html'"></div>	
+<head>
+
+    <!-- CSS (load bootstrap) -->
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/bootstrap.css" />
     <link rel="icon" href="/css/images/favicon.ico" />
     
+    <style>
+        .navbar { border-radius:0; }
+    </style>
+
     <script src="./scripts/angular.js"></script>
     <script src="./scripts/angular-route.js"></script>    
+    <script src="./scripts/angular-ui-router.js"></script>
+    
     <script src="./router.js"></script>	
     <script src="./controllers/controllerFactory.js"></script>
     <script src="./services/servicesFactory.js"></script>
     
-    <div ng-view=""></div>
+</head>
+
+<!-- apply our angular app to our site -->
+<body ng-app="routerApp">
+
+<!-- NAVIGATION -->
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" ui-sref="#">Even Scheduler</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li><a ui-sref="home">Home</a></li>
+        <li><a ui-sref="login">Login</a></li>
+        <li><a ui-sref="users">Users</a></li>
+        <li><a ui-sref="rooms">Rooms</a></li>
+        <li><a ui-sref="buildings">Buildings</a></li>
+        <li><a ui-sref="about">About</a></li>
+    </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+
 </body>
-</html>    
+</html>

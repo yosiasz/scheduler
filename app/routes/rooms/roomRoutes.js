@@ -1,15 +1,15 @@
 var cors = require('cors'),
     express = require('express'),
-    userRouter = express.Router();
+     roomRouter = express.Router();
      
 var router = function(connection){
-    /*app.options('/users', cors()); // enable pre-flight request for SELECT request 
-    app.options('/users:userid', cors()); // enable pre-flight request for SELECT request 
-    app.options('/users', cors()); // enable pre-flight request for INSERT request 
-    app.options('/users/:userid', cors()); // enable pre-flight request for DELETE request*/
-    userRouter.route('/')    
+    /*app.options('/rooms', cors()); // enable pre-flight request for SELECT request 
+    app.options('/rooms:roomid', cors()); // enable pre-flight request for SELECT request 
+    app.options('/rooms', cors()); // enable pre-flight request for INSERT request 
+    app.options('/rooms/:roomid', cors()); // enable pre-flight request for DELETE request*/
+    roomRouter.route('/rooms')    
     .get(function(req,res){
-        connection.query('SELECT userid, username FROM users', req.params.id, function(err, rows, fields) {
+        connection.query('SELECT roomid, roomname FROM rooms', req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
                 res.statusCode = 500;
@@ -21,9 +21,9 @@ var router = function(connection){
             res.send(rows);
         });
     });
-    userRouter.route('/:userid')   
+    roomRouter.route('/rooms/:roomid')   
     .get(function(req,res){
-        connection.query('SELECT userid, username FROM users WHERE userid = ' + req.params.userid, req.params.id, function(err, rows, fields) {
+        connection.query('SELECT roomid, roomname FROM rooms WHERE roomid = ' + req.params.roomid, req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
                 res.statusCode = 500;
@@ -35,9 +35,9 @@ var router = function(connection){
             res.send(rows);
         });
     })
-    userRouter.route('/')
+    roomRouter.route('/rooms')
     .post(function(req, res){
-    connection.query('INSERT INTO users(username) values ("' + req.body.username + '")', req.params.id, function(err, rows, fields) {
+    connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -50,12 +50,12 @@ var router = function(connection){
             });
             
     })
-    userRouter.route('/:userid')
+    roomRouter.route('/rooms/:roomid')
     .delete(function(req, res){
 
-        var userid = req.params.userid;
+        var roomid = req.params.roomid;
         
-        connection.query('DELETE FROM users Where userid = ' + userid , req.params.id, function(err, rows, fields) {
+        connection.query('DELETE FROM rooms Where roomid = ' + roomid , req.params.id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -70,7 +70,7 @@ var router = function(connection){
     
     });
     
-    return userRouter;
+    return roomRouter;
         
 };
 

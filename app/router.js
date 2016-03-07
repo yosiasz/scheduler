@@ -1,5 +1,38 @@
 'use strict';
+var routerApp = angular.module('schedulerApp', ['ui.router']);
 
+routerApp.config(function($stateProvider, $urlRouterProvider) {
+    
+    $urlRouterProvider
+        .otherwise('/');
+    
+    $stateProvider
+            
+        .state('home', {
+            url: '/Login',
+            templateUrl: 'partials/buildings.html'
+        })
+                .state('login', {
+            url: '/Login',
+            templateUrl: 'partials/login.html'
+        })
+
+        .state('users', {
+            url: '/Users',
+            templateUrl: 'partials/users.html'
+        })
+
+        .state('rooms', {
+            url: '/Rooms',
+            templateUrl: 'partials/rooms.html'
+        })
+
+        .state('buildings', {
+            url: '/Buildings',
+            templateUrl: 'partials/buildings.html'
+        })
+});
+/*
 var app = angular.module('schedulerApp', ['ngRoute']);
 
 //This configures the routes and associates each route with a view and a controller
@@ -58,3 +91,4 @@ app.config(function ($routeProvider) {
         })    
         .otherwise({ redirectTo: '/' });
 })
+*/
