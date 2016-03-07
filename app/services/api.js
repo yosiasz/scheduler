@@ -15,10 +15,9 @@ var mysql = require('mysql'),
     express = require('express'),
     session = require('express-session'), 
     bodyParser = require('body-parser'),
-    multer = require('multer'), 
 	util = require('util'), 
     app = module.exports = express(), 
-	config = require('../config/config'),
+	config = require('../config/config.js'),
     cors = require('cors')
  
  
@@ -27,16 +26,17 @@ var mysql = require('mysql'),
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
- var connection = module.exports = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password : 'Semrina77',
-	port : 3306, 
-    database: 'scheduler'
+ var connection = mysql.createConnection({
+    host: config.host,
+    user: config.user,
+    password : config.password,
+	port : config.port, 
+    database: config.database
 });
 
 var sess;
  
+//console.log(connection);
 
 app.all('*', function(req, res, next) {
     sess=req.session;
@@ -44,16 +44,15 @@ app.all('*', function(req, res, next) {
 	next();
  });
  
-var rooms = require('../routes/rooms/rooms.js');
-var buildings = require('../routes/buildings/buildings.js');
-var persons = require('../routes/persons/persons.js');
-var users = require('../routes/users/users.js');
+var rooms = require('../routes/rooms/rooms.js')(connection);
+var buildings = require('../routes/buildings/buildings.js')(connection);
+var persons = require('../routes/persons/persons.js')(connection);
+var users = require('../routes/users/users.js')(connection);
 
 app.use(rooms);
 app.use(buildings);
-app.use(users);
 app.use(persons);
-
+app.use(users);
 app.listen(8001);
 
 console.log('Http Server running at http://localhost:8001/api/*');

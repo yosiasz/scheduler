@@ -1,5 +1,7 @@
 ##npm
 node_modules/
+app/config/
+
 #################
 ## Eclipse
 #################

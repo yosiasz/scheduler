@@ -1,23 +1,13 @@
 var cors = require('cors'),
     express = require('express'),
-     app = express();
-     
-var mysql = require('mysql');     
- var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'scheduler',
-    password : 'dasscheduler',
-	port : 3306, 
-    database: 'scheduler'
-});
+    app = express();
 
-
-module.exports = function(){
+var rooms = function(connection){
     app.options('/rooms', cors()); // enable pre-flight request for SELECT request 
     app.options('/rooms:roomid', cors()); // enable pre-flight request for SELECT request 
     app.options('/rooms', cors()); // enable pre-flight request for INSERT request 
-    app.options('/rooms/:roomid', cors()); // enable pre-flight request for DELETE request 
-
+    app.options('/rooms/:roomid', cors()); // enable pre-flight request for DELETE request
+    
     app.get('/rooms/',  cors(), function(req,res){
         connection.query('SELECT roomid, roomname FROM rooms', req.params.id, function(err, rows, fields) {
             if (err) {
@@ -79,4 +69,6 @@ module.exports = function(){
     
     return app;
         
-}();
+};
+
+module.exports = rooms;

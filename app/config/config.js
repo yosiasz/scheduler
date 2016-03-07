@@ -1,10 +1,7 @@
-module.export={
-/*
-*/
-"host" : "localhost",
-"port" : "3306",
-"use-database" : "TRUE",
-"username" : "root",
-"password" : "Semrina77",
-"database" : "scheduler"
-}
+module.exports ={
+'host' : 'localhost',
+'port' : '3306',
+'user' : 'scheduler',
+'password' : 'Semrina77',
+'database' : 'scheduler'
+};
