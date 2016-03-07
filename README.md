@@ -1,14 +1,18 @@
 # scheduler
 simple tool to help in scheduling events
 
-uses
+Install the following
 
-node.js
-angular
-express.js
-mysql backend
+* node.js
+* angular
+* express.js
+* mysql backend
 
-* clone locally
+* Open mysql and and run script under folder sqlscripts
+
+* make sure to create a user: scheduler pwd:dasscheduler or change config references to your own user
+
+* clone this repo locally
 
 * open a node command console and traverse to folder scheduler. at root scheduler folder run
    npm install
@@ -19,10 +23,6 @@ mysql backend
 * open a node command console. go to path scheduler node app/services/api.js
     this will run the API
     
-* Open MySQL and run script under folder sqlscripts
-
-* make sure to create a user: scheduler pwd:dasscheduler or change config references to your own user
-
 * go to http://localhost:8000/app/Index.html#/        
 
 Work in Progress
