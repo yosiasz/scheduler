@@ -1,62 +1,65 @@
-'use strict';
+var mysql = require('mysql'), 
+    express = require('express'),
+    app = express(), 
+    session = require('express-session'), 
+    bodyParser = require('body-parser'),
+    passport = require('passport'),
+	util = require('util'), 
+	mysqlconfig = require('./config/mysql.js'),
+    passportconfig = require('./config/passport.js'),
+    cors = require('cors'),
+    cookieParser = require('cookie-parser')
+    
+ 
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+//Looks to see if there is a body json and parses
+app.use(bodyParser.json());
+app.use(express.static(__dirname));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-var app = angular.module('schedulerApp', ['ngRoute']);
+app.use(session({
+    secret: 'scheduler',
+    name: 'scheduler',
+    //store: sessionStore, // connect-mongo session store
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
 
-//This configures the routes and associates each route with a view and a controller
-//partials are also called views?
-app.config(function ($routeProvider) {
-    $routeProvider
-        .when('/',
-            {
-                title: 'Login',
-                controller: 'authController',
-                templateUrl: '/app/partials/login.html'
-            })
-        .when('/home',
-            {
-                controller: 'authController',
-                templateUrl: '/app/partials/login.html'
-            })
-        .when('/buildings',
-            {
-                //controller: 'buildingsController',
-                templateUrl: '/app/partials/buildings.html'
-            })
-        .when('/rooms',
-            {
-                controller: 'roomsController',
-                templateUrl: '/app/partials/rooms.html'
-            })
-        .when('/users',
-            {
-                controller: 'usersController',
-                templateUrl: '/app/partials/users.html'
-            })
-        .when('/persons',
-            {
-                controller: 'personsController',
-                templateUrl: '/app/partials/persons.html'
-            })
-            
-        .when('/about',
-            {
-                controller: 'aboutCtrl',
-                templateUrl: '/app/partials/about.html'
-            })
-        .when('/logout', {
-            title: 'Logout',
-            templateUrl: 'app/partials/logout.html',
-            controller: 'logoutCtrl'
-        })
-        .when('/signup', {
-            title: 'Signup',
-            templateUrl: 'app/partials/signup.html',
-            controller: 'authController'
-        })
-        .when('/dashboard', {
-            title: 'Dashboard',
-            templateUrl: 'app/partials/dashboard.html',
-            controller: 'authController'
-        })    
-        .otherwise({ redirectTo: '/' });
-})
+//app.use(cookieParser);
+
+var connection = mysql.createConnection({
+    host: mysqlconfig.host,
+    user: mysqlconfig.user,
+    password : mysqlconfig.password,
+	port : mysqlconfig.port, 
+    database: mysqlconfig.database
+});
+
+var sess;
+ 
+//console.log(connection);
+
+app.all('*', function(req, res, next) {
+    sess=req.session;
+    res.header("Access-Control-Allow-Origin", "*");
+	next();
+ });
+ 
+var rooms = require('./routes/rooms/rooms.js')(connection);
+var buildings = require('./routes/buildings/buildings.js')(connection);
+var persons = require('./routes/persons/persons.js')(connection);
+var userRouter = require('./routes/persons/userRoutes')(connection);
+var authRouter = require('./routes/auth/authRoutes.js')(connection);
+
+app.use(rooms);
+app.use(buildings);
+app.use(persons);
+app.use('/Users',userRouter);
+app.use('/Auth', authRouter);
+
+//module.exports = app;
+
+app.listen(8001);
+console.log('Http Server running at http://localhost:8001');

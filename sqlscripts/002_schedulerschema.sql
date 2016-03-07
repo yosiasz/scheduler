@@ -29,25 +29,16 @@ CREATE  TABLE scheduler.users (
 
   userid INT NOT NULL AUTO_INCREMENT ,
   username VARCHAR(45) NOT NULL ,
-  firstname VARCHAR(45) NOT NULL ,
-  lastname VARCHAR(45) NOT NULL,
-  usertypeid int NOT NULL,  
+  password VARCHAR(45) NOT NULL ,
   createddate DATETIME NOT NULL,
   active BIT NOT NULL DEFAULT 1 ,
 
   PRIMARY KEY (userid) );
 
-ALTER TABLE scheduler.users 
-ADD CONSTRAINT FK_usertype
-FOREIGN KEY (usertypeid) REFERENCES scheduler.usertypes(usertypeid) 
-;
-
-
 INSERT INTO scheduler.users
-(username,firstname,lastname, usertypeid, createddate, active)
-select 'Admin', 'admin', 'admin', usertypeid, now(), 1 
-  from scheduler.usertypes where usertype = 'System Admin';
-;
+(username, password, createddate, active)
+select 'admin', 'admin', now(), 1 union
+select 'sampleuser', 'sampleuser', now(), 1;
 #---------------#
 
 DROP TABLE IF EXISTS scheduler.taskcategories;
