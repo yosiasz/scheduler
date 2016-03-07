@@ -8,28 +8,28 @@ angular
 express.js
 mysql backend
 
-1. clone locally
+* clone locally
 
-2. at root scheduler folder run
+* open a node command console and traverse to folder scheduler. at root scheduler folder run
    npm install
    
-3. open a node command console. go to path scheduler run
+* then run
    node server.js
 
-4. open a node command console. go to path scheduler node app/services/api.js
+* open a node command console. go to path scheduler node app/services/api.js
     this will run the API
     
-5. Open MySQL and run script under folder sqlscripts
+* Open MySQL and run script under folder sqlscripts
 
-6. make sure to create a user: scheduler pwd:dasscheduler or change config references to your own user
+* make sure to create a user: scheduler pwd:dasscheduler or change config references to your own user
 
-7. go to http://localhost:8000/app/Index.html#/        
+* go to http://localhost:8000/app/Index.html#/        
 
 Work in Progress
 
 
 TODO
 
-    use one config file
-    prevents folder traversal when landing on localhost:8000
+    use one config file                                             done
+    prevents folder traversal when landing on localhost:8000        
     solidify routing
