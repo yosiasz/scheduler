@@ -1,12 +1,17 @@
 var cors = require('cors'),
     express = require('express'),
-     roomRouter = express.Router();
-     
+    app = express(),
+    roomRouter = express.Router()   
+    
 var router = function(connection){
+    
+    roomRouter.all('*', cors());
+    
     /*app.options('/rooms', cors()); // enable pre-flight request for SELECT request 
     app.options('/rooms:roomid', cors()); // enable pre-flight request for SELECT request 
     app.options('/rooms', cors()); // enable pre-flight request for INSERT request 
     app.options('/rooms/:roomid', cors()); // enable pre-flight request for DELETE request*/
+
     roomRouter.route('/rooms')    
     .get(function(req,res){
         connection.query('SELECT roomid, roomname FROM rooms', req.params.id, function(err, rows, fields) {
@@ -50,7 +55,8 @@ var router = function(connection){
             });
             
     })
-    roomRouter.route('/rooms/:roomid')
+    //app.options('/rooms/:roomid', cors());    
+    roomRouter.route('/rooms/:roomid')    
     .delete(function(req, res){
 
         var roomid = req.params.roomid;

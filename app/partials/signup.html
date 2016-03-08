@@ -33,7 +33,7 @@
                                 <div class="col-sm-7">
                                     <span class="block input-icon input-icon-right">
                                 <input type="password" class="form-control" name="password2" placeholder="Password Again" ng-model="signup.password2" password-match="signup.password" required/>                                
-                                <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required"> Enter password again.</small>
+                                <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.required">Enter password again.</small>
 
                                <small class="errorMessage" data-ng-show="signupForm.password2.$dirty && signupForm.password2.$error.passwordNoMatch && !signupForm.password2.$error.required"> Password do not match.</small>
 
@@ -64,15 +64,7 @@
                             </span>
                                 </div>
                             </div>
-<!--                             <div class="form-group">
-                                <label class="col-sm-5 control-label no-padding-right" for="address">Address</label>
-                                <div class="col-sm-7">
-                                    <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="Address" ng-model="signup.address" />
-                            </span>
-                                </div>
-                            </div>
- -->                            <div class="form-group">
+                            <div class="form-group">
                                 <span class="lbl col-sm-5"> </span>
                                 <div class="col-sm-7">
                                     <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-click="signUp(signup)" data-ng-disabled="signupForm.$invalid">
@@ -82,7 +74,7 @@
                             </div>
                             </fieldset>
                             <span class="lbl col-sm-5"> </span>
-                            <div class="col-sm-7">Already have an account? <a href="#/login">SignIn</a>
+                            <div class="col-sm-7">Already have an account? <a href="#/Login">SignIn</a>
                             </div>
                         </form>
                     </div>

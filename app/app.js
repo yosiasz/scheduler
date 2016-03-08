@@ -45,6 +45,10 @@ var sess;
 app.all('*', function(req, res, next) {
     sess=req.session;
     res.header("Access-Control-Allow-Origin", "*");
+/*	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Headers', 'Accept');
+    res.header('Access-Control-Allow-Headers', 'Origin');    */
 	next();
  });
  
