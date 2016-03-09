@@ -1,4 +1,4 @@
 //172.16.32.62  Admin Semrina77
 module.exports ={
-'url' : 'mongodb://admin:Semrina77@172.16.32.62:27017/scheduler'
+'url' : 'mongodb://scheduler:Semrina77@10.0.0.6:27017/scheduler'
 };

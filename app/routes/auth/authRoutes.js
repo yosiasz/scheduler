@@ -1,6 +1,6 @@
 var cors = require('cors'),
     express = require('express'),
-     authRouter = express.Router();
+    authRouter = express.Router();
      
 
 var router = function(connection){
