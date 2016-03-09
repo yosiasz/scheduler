@@ -1,70 +1,44 @@
-var mysql = require('mysql'), 
-    express = require('express'),
-    app = express(), 
-    session = require('express-session'), 
-    bodyParser = require('body-parser'),
-    passport = require('passport'),
-	util = require('util'), 
-	mysqlconfig = require('./config/mysql.js'),
-    passportconfig = require('./config/passport.js'),
-    cors = require('cors'),
-    cookieParser = require('cookie-parser')
+'use strict';
+var routerApp = angular.module('schedulerApp', ['ui.router']);
+
+routerApp.config(function($stateProvider, $urlRouterProvider) {
     
- 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-//Looks to see if there is a body json and parses
-app.use(bodyParser.json());
-app.use(express.static(__dirname));
-app.use(express.static(__dirname + '/partials'));
-app.use(bodyParser.urlencoded({ extended: true }));
+    $urlRouterProvider
+        .otherwise('/');
+    
+    $stateProvider
+            
+        .state('home', {
+            url: '/Home',
+            templateUrl: 'partials/home.html'
+        })
+                .state('login', {
+            url: '/Login',
+            templateUrl: 'partials/login.html'
+        })
 
-app.use(session({
-    secret: 'scheduler',
-    name: 'scheduler',
-    //store: sessionStore, // connect-mongo session store
-    proxy: true,
-    resave: true,
-    saveUninitialized: true
-}));
+        .state('users', {
+            url: '/Users',
+            templateUrl: 'partials/users.html'
+        })
 
-//app.use(cookieParser);
+        .state('rooms', {
+            url: '/Rooms',
+            templateUrl: 'partials/rooms.html'
+        })
 
-var connection = mysql.createConnection({
-    host: mysqlconfig.host,
-    user: mysqlconfig.user,
-    password : mysqlconfig.password,
-	port : mysqlconfig.port, 
-    database: mysqlconfig.database
+        .state('buildings', {
+            url: '/Buildings',
+            templateUrl: 'partials/buildings.html'
+        })
+
+        .state('signup', {
+            url: '/Signup',
+            templateUrl: 'partials/signup.html'
+        })
+    
+        .state('about', {
+            url: '/About',
+            templateUrl: 'partials/about.html'
+        })
 });
-
-var sess;
- 
-//console.log(connection);
-
-app.all('*', function(req, res, next) {
-    sess=req.session;
-    res.header("Access-Control-Allow-Origin", "*");
-/*	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    res.header('Access-Control-Allow-Headers', 'Accept');
-    res.header('Access-Control-Allow-Headers', 'Origin');    */
-	next();
- });
- 
-var rooms = require('./routes/rooms/roomRoutes.js')(connection);
-var buildings = require('./routes/buildings/buildings.js')(connection);
-var persons = require('./routes/persons/persons.js')(connection);
-var userRouter = require('./routes/persons/userRoutes')(connection);
-var authRouter = require('./routes/auth/authRoutes.js')(connection);
-
-app.use(rooms);
-app.use(buildings);
-app.use(persons);
-app.use('/Users',userRouter);
-app.use('/Auth', authRouter);
-
-//module.exports = app;
-
-app.listen(8001);
-console.log('Http Server running at http://localhost:8001');
