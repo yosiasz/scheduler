@@ -48,6 +48,7 @@ app.all('*', function(req, res, next) {
  });
  
 var roomRoutes = require('../routes/rooms/roomRoutes.js')(connection);
+//var roomRoutes = require('../routes/rooms/index.js')(connection);
 var buildingRoutes = require('../routes/buildings/buildingRoutes.js')(connection);
 var personRoutes = require('../routes/persons/personRoutes.js')(connection);
 var userRoutes = require('../routes/persons/userRoutes')(connection);

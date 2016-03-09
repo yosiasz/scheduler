@@ -142,7 +142,10 @@ CREATE  TABLE scheduler.buildings (
 
 INSERT INTO scheduler.buildings
 (buildingname, createddate,  active)
-select 'Arena Hall', now(), 1 
+select 'Arena Hall', now(), 1 union
+select 'ComQuest', now(), 1 union
+select 'Quest', now(), 1 union
+select 'Jazz Alley', now(), 1  
 ;
 
 #---------------#
