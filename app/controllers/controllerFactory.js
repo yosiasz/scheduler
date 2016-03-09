@@ -9,6 +9,13 @@ app.controller('authController', ['$scope', 'authFactory',
     $scope.products;    
 
 }]) 
+app.controller('profileController', ['$scope', 'authFactory', 
+        function ($scope, authFactory) {
+
+    $scope.status;
+    $scope.products;    
+
+}]) 
 app.controller('personsController', ['$scope', 'personsFactory', 
         function ($scope, personsFactory) {
 

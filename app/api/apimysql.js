@@ -13,11 +13,12 @@ var mysql = require('mysql'),
  
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-//Looks to see if there is a body json and parses
+// Looks to see if there is a body json and parses
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/partials'));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(session({
     secret: 'scheduler',
@@ -54,7 +55,7 @@ var authRoutes = require('../routes/auth/authRoutes.js')(connection);
 
 app.use(roomRoutes);
 app.use(buildingRoutes);
-app.use(personRoutes);
+app.use('/Persons', personRoutes);
 app.use('/Users',userRoutes);
 app.use('/Auth', authRoutes);
 

@@ -13,7 +13,7 @@ CREATE  TABLE scheduler.usertypes (
   usertype VARCHAR(45) NOT NULL ,
   usertypedescr VARCHAR(45) NULL ,
   createddate DATETIME NOT NULL,
-  active BIT NOT NULL DEFAULT 1 ,
+  active BIT NOT NULL,
 
   PRIMARY KEY (usertypeid) );
 
@@ -30,15 +30,16 @@ CREATE  TABLE scheduler.users (
   userid INT NOT NULL AUTO_INCREMENT ,
   username VARCHAR(45) NOT NULL ,
   password VARCHAR(45) NOT NULL ,
+  email VARCHAR(100) NOT NULL ,
   createddate DATETIME NOT NULL,
-  active BIT NOT NULL DEFAULT 1 ,
+  active BIT NOT NULL ,
 
   PRIMARY KEY (userid) );
 
 INSERT INTO scheduler.users
-(username, password, createddate, active)
-select 'admin', 'admin', now(), 1 union
-select 'sampleuser', 'sampleuser', now(), 1;
+(username, password, email, createddate, active)
+select 'admin', 'admin', 'admin@scheduler.com', now(), 1 union
+select 'sampleuser', 'sampleuser', 'sampleuser@scheduler.com', now(), 1;
 #---------------#
 
 DROP TABLE IF EXISTS scheduler.taskcategories;
@@ -49,7 +50,7 @@ CREATE  TABLE scheduler.taskcategories (
   taskcategoryname VARCHAR(45) NOT NULL ,
   taskcategorydescr VARCHAR(45) NULL ,
   createddate DATETIME NOT NULL,
-  active BIT NOT NULL DEFAULT 1 ,
+  active BIT NOT NULL ,
 
   PRIMARY KEY (taskcategoryid) );
 
@@ -71,7 +72,7 @@ CREATE  TABLE scheduler.tasks (
   taskdescr VARCHAR(45) NULL ,
   taskcategoryid int null,
   createddate DATETIME NOT NULL,
-  active BIT NOT NULL DEFAULT 1 ,
+  active BIT NOT NULL,
 
   PRIMARY KEY (taskid) );
 
@@ -109,8 +110,8 @@ CREATE  TABLE scheduler.persons (
   firstname VARCHAR(45) NOT NULL ,
   lastname VARCHAR(45) NOT NULL,
   genderid int not null,
-  createddate DATETIME NOT NULL DEFAULT now(),
-  active BIT NOT NULL DEFAULT 1 ,
+  createddate DATETIME NOT NULL,
+  active BIT NOT NULL ,
 
   PRIMARY KEY (personid) );
 
@@ -134,8 +135,8 @@ CREATE  TABLE scheduler.buildings (
 
   buildingid INT NOT NULL AUTO_INCREMENT ,
   buildingname VARCHAR(45) NOT NULL ,
-  createddate DATETIME NOT NULL DEFAULT now(),
-  active BIT NOT NULL DEFAULT 1 ,
+  createddate DATETIME NOT NULL,
+  active BIT NOT NULL ,
 
   PRIMARY KEY (buildingid) );
 
@@ -152,8 +153,8 @@ CREATE  TABLE scheduler.rooms (
 
   roomid INT NOT NULL AUTO_INCREMENT ,
   roomname VARCHAR(45) NOT NULL ,
-  createddate datetime NOT NULL DEFAULT now(),
-  active BIT NOT NULL DEFAULT 1 ,
+  createddate datetime NOT NULL,
+  active BIT NOT NULL ,
 
   PRIMARY KEY (roomid) );
 
