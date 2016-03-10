@@ -17,6 +17,7 @@ roomRouter.get('/get/:roomid', require('./get-room.js'));
  
 /* 
 router.post('/new', require('./new-user.js'));  
-router.post('/delete/:id', require('./delete-user.js'));  */  
+router.post('/delete/:id', require('./delete-user.js'));  
+*/  
     return roomRouter;
 };
