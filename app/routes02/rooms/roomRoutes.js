@@ -15,16 +15,16 @@ var router = function (connection) {
             mongodb.connect(connection, function (err, db) {
                 var collection = db.collection('rooms');
             
-                collection.find({}).toArray(function (err, results) {
-                /*if (err) {
+                collection.find({}, {fields: {_id: 0}}).toArray(function (err, results) {
+                if (err) {
                     console.error(err);
                     res.statusCode = 500;
                     res.send({
                         result: 'error',
                         err:    err.code
                     });
-                }*/
-                    res.send('We are in!');
+                }
+                    res.send(results[0]);
                 });
             });
 
