@@ -46,13 +46,13 @@ app.all('*', function(req, res, next) {
 	next();
  });
  
-var roomRoutes = require('../routes/rooms/roomRoutes.js')(connection);
+var roomRoutes = require('../routes/rooms/index.js');
 var buildingRoutes = require('../routes/buildings/buildingRoutes.js')(connection);
 var personRoutes = require('../routes/persons/personRoutes.js')(connection);
 var userRoutes = require('../routes/persons/userRoutes')(connection);
 var authRoutes = require('../routes/auth/authRoutes.js')(connection);
 
-app.use(roomRoutes);
+app.use('/Rooms',roomRoutes);
 app.use(buildingRoutes);
 app.use(personRoutes);
 app.use('/Users',userRoutes);
