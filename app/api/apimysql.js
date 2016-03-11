@@ -56,7 +56,7 @@ var userRoutes = require('../routes/persons/userRoutes')(connection);
 var authRoutes = require('../routes/auth/authRoutes.js')(connection);
 
 app.use('/Rooms', roomRoutes);
-app.use(buildingRoutes);
+app.use('/Buildings',buildingRoutes);
 app.use('/Persons', personRoutes);
 app.use('/Users',userRoutes);
 app.use('/Auth', authRoutes);

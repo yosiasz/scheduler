@@ -1,14 +1,14 @@
 var cors = require('cors'),
     express = require('express'),
-    app = express();
-
-var buildings = function(connection){
-    app.options('/buildings', cors()); // enable pre-flight request for SELECT request 
-    app.options('/buildings:buildingid', cors()); // enable pre-flight request for SELECT request 
-    app.options('/buildings', cors()); // enable pre-flight request for INSERT request 
-    app.options('/buildings/:buildingid', cors()); // enable pre-flight request for DELETE request
+    app = express(),
+    buildingRouter = express.Router()   
     
-    app.get('/buildings/',  cors(), function(req,res){
+var router = function(connection){
+    
+    buildingRouter.all('*', cors());
+    
+    buildingRouter.route('/')
+    .get(function(req,res){
         connection.query('SELECT buildingid, buildingname FROM buildings', req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
@@ -21,7 +21,8 @@ var buildings = function(connection){
             res.send(rows);
         });
     });
-    app.get('/buildings/:buildingid',  cors(), function(req,res){
+    buildingRouter.route('/:buildingid')
+     .get(function(req,res){
         connection.query('SELECT buildingid, buildingname FROM buildings WHERE buildingid = ' + req.params.buildingid, req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
@@ -34,7 +35,8 @@ var buildings = function(connection){
             res.send(rows);
         });
     });
-    app.post('/buildings',  cors(), function(req, res){
+    buildingRouter.route('/:buildingname')
+    .post(function(req, res){
     connection.query('INSERT INTO buildings(buildingname) values ("' + req.body.buildingname + '")', req.params.id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
@@ -48,7 +50,8 @@ var buildings = function(connection){
             });
             
     });
-    app.delete('/buildings/:buildingid',  cors(), function(req, res){
+    buildingRouter.route('/:buildingid')
+    .delete(function(req, res){
 
         var buildingid = req.params.buildingid;
         
@@ -67,8 +70,8 @@ var buildings = function(connection){
     
     });
     
-    return app;
+    return buildingRouter;
         
 };
 
-module.exports = buildings;
+module.exports = router;
