@@ -12,11 +12,12 @@ module.exports = function (connection) {
 
 
 
-roomRouter.get('/get', require('./get-rooms.js'));  
-roomRouter.get('/get/:roomid', require('./get-room.js')); 
+roomRouter.get('/', require('./get-rooms.js'));  
+roomRouter.get('/:roomid', require('./get-room.js')); 
+roomRouter.post('/:roomname', require('./new-room.js'));  
  
 /* 
-router.post('/new', require('./new-user.js'));  
+
 router.post('/delete/:id', require('./delete-user.js'));  
 */  
     return roomRouter;
