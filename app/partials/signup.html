@@ -1,4 +1,4 @@
-<div class="page-content">
+<div ng-controller="usersController" class="page-content">
     <div class="row">
         <div class="space-6"></div>
         <div class="col-sm-6 col-sm-offset-1">
@@ -41,33 +41,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-5 control-label no-padding-right" for="name">First Name</label>
+                                <label class="col-sm-5 control-label no-padding-right" for="name">Email</label>
                                 <div class="col-sm-7">
                                     <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="Name" ng-model="signup.firstname" />
-                            </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label no-padding-right" for="name">Last Name</label>
-                                <div class="col-sm-7">
-                                    <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="Name" ng-model="signup.lastname" />
-                            </span>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-5 control-label no-padding-right" for="phone">Phone</label>
-                                <div class="col-sm-7">
-                                    <span class="block input-icon input-icon-right">
-                                <input type="text" class="form-control" placeholder="Phone" name="phone" ng-model="signup.phone"/>
+                                <input type="text" class="form-control" placeholder="Name" ng-model="signup.email" />
                             </span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <span class="lbl col-sm-5"> </span>
                                 <div class="col-sm-7">
-                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-click="signUp(signup)" data-ng-disabled="signupForm.$invalid">
+                                    <button type="submit" class="width-35 pull-right btn btn-sm btn-primary" ng-click="insertuser(signup)" data-ng-disabled="signupForm.$invalid">
                                         Sign Up
                                     </button>
                                 </div>

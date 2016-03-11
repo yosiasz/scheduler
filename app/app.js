@@ -4,7 +4,7 @@ var routerApp = angular.module('schedulerApp', ['ui.router']);
 routerApp.config(function($stateProvider, $urlRouterProvider) {
     
     $urlRouterProvider
-        .otherwise('/');
+        .otherwise('/Home');
     
     $stateProvider
             
@@ -36,7 +36,11 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
             url: '/Signup',
             templateUrl: 'partials/signup.html'
         })
-    
+        .state('profile', {
+            url: '/Profile',
+            templateUrl: 'partials/profile.html'
+        })
+        
         .state('about', {
             url: '/About',
             templateUrl: 'partials/about.html'

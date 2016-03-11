@@ -13,11 +13,13 @@ var mysql = require('mysql'),
  
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-//Looks to see if there is a body json and parses
+// Looks to see if there is a body json and parses
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/partials'));
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(session({
     secret: 'scheduler',
@@ -46,15 +48,26 @@ app.all('*', function(req, res, next) {
 	next();
  });
  
+<<<<<<< HEAD
 var roomRoutes = require('../routes/rooms/index.js');
+=======
+//var roomRoutes = require('../routes/rooms/roomRoutes.js')(connection);
+var roomRoutes = require('../routes/rooms/index.js')(connection);
+>>>>>>> origin/master
 var buildingRoutes = require('../routes/buildings/buildingRoutes.js')(connection);
 var personRoutes = require('../routes/persons/personRoutes.js')(connection);
 var userRoutes = require('../routes/persons/userRoutes')(connection);
 var authRoutes = require('../routes/auth/authRoutes.js')(connection);
 
+<<<<<<< HEAD
 app.use('/Rooms',roomRoutes);
 app.use(buildingRoutes);
 app.use(personRoutes);
+=======
+app.use('/Rooms', roomRoutes);
+app.use('/Buildings',buildingRoutes);
+app.use('/Persons', personRoutes);
+>>>>>>> origin/master
 app.use('/Users',userRoutes);
 app.use('/Auth', authRoutes);
 
