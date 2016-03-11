@@ -161,10 +161,9 @@ CREATE  TABLE scheduler.rooms (
 
   PRIMARY KEY (roomid) );
 
-INSERT INTO scheduler.rooms
-(roomname)
-select 'Main Hall' union
-select 'Second Hall' union
-select 'Rainier' union
-select 'Mt Shazzam'
+INSERT INTO scheduler.rooms(roomname,createddate, active)
+select 'Main Hall', now(), 1 union
+select 'Second Hall', now(), 1 union
+select 'Rainier', now(), 1 union
+select 'Mt Shazzam', now(), 1
 ;

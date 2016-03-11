@@ -1,6 +1,5 @@
-var cors = require('cors'),
-    roomRouter =require('express').Router()   
- mysql = require('mysql');
+var roomRouter =require('express').Router()   
+    mysql = require('mysql');
 
 var connection = mysql.createConnection({
 'host' : 'localhost',
@@ -10,8 +9,8 @@ var connection = mysql.createConnection({
 'database' : 'scheduler'
 });
 
-var router = function(req, res){
-    connection.query('SELECT roomid, roomname FROM rooms WHERE roomid = ' + req.params.roomid, req.params.id, function(err, rows, fields) {
+module.exports = function(req, res){
+    connection.query('SELECT buildingid, buildingname FROM buildings', req.params.id, function(err, rows, fields) {
         if (err) {
             console.error(err);
             res.statusCode = 500;
@@ -23,5 +22,3 @@ var router = function(req, res){
         res.send(rows);
     }); 
 };
-
-module.exports = router;

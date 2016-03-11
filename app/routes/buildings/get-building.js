@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 
 var router = function(req, res){
-    connection.query('SELECT roomid, roomname FROM rooms WHERE roomid = ' + req.params.roomid, req.params.id, function(err, rows, fields) {
+    connection.query('SELECT buildingid, buildingname FROM buildings WHERE buildingid = ' + req.params.buildingid, req.params.id, function(err, rows, fields) {
         if (err) {
             console.error(err);
             res.statusCode = 500;

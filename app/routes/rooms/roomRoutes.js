@@ -1,13 +1,12 @@
 var cors = require('cors'),
-    express = require('express'),
-    app = express(),
-    roomRouter = express.Router()   
+    roomRouter = require('express').Router();
+        
     
 var router = function(connection){
     
     roomRouter.all('*', cors());
     
-    roomRouter.route('/rooms')    
+    roomRouter.route('/')    
     .get(function(req,res){
         connection.query('SELECT roomid, roomname FROM rooms', req.params.id, function(err, rows, fields) {
             if (err) {
@@ -21,7 +20,7 @@ var router = function(connection){
             res.send(rows);
         });
     });
-    roomRouter.route('/rooms/:roomid')   
+    roomRouter.route('/:roomid')   
     .get(function(req,res){
         connection.query('SELECT roomid, roomname FROM rooms WHERE roomid = ' + req.params.roomid, req.params.id, function(err, rows, fields) {
             if (err) {
@@ -35,7 +34,7 @@ var router = function(connection){
             res.send(rows);
         });
     })
-    roomRouter.route('/rooms')
+    roomRouter.route('/:roomname')
     .post(function(req, res){
     connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
                 if (err) {
@@ -50,8 +49,7 @@ var router = function(connection){
             });
             
     })
-    //app.options('/rooms/:roomid', cors());    
-    roomRouter.route('/rooms/:roomid')    
+    roomRouter.route('/:roomid')    
     .delete(function(req, res){
 
         var roomid = req.params.roomid;

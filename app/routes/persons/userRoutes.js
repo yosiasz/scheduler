@@ -34,7 +34,7 @@ var router = function(connection){
     userRouter.route('/:userid')   
     .get(function(req,res){
         res.send(req.params.userid);
-/*        connection.query('SELECT userid, username FROM users WHERE userid = ' + req.params.userid, req.params.id, function(err, rows, fields) {
+        connection.query('SELECT userid, username FROM users WHERE userid = ' + req.params.userid, req.params.id, function(err, rows, fields) {
             if (err) {
                 console.error(err);
                 res.statusCode = 500;
@@ -44,7 +44,7 @@ var router = function(connection){
                 });
             }
             res.send(rows);
-        });*/
+        });
     });
     
     userRouter.route('/:userid')
