@@ -8,14 +8,9 @@ var roomRouter = require('express').Router(),
 
 roomRouter.all('*', cors());
 
-var router = function (connection) {   
+roomRouter.get('/', require('./get-rooms.js'));      
+roomRouter.get('/:roomid', require('./get-room.js')); 
+roomRouter.post('/:roomname', require('./new-room.js'));  
+roomRouter.delete('/:roomid', require('./delete-room.js')); 
 
-    roomRouter.get('/', require('./get-rooms.js'));      
-    roomRouter.get('/:roomid', require('./get-room.js')); 
-    roomRouter.post('/:roomname', require('./new-room.js'));  
-    roomRouter.delete('/:roomid', require('./delete-room.js')); 
-
-    return roomRouter;
-};
-
-module.exports = router;
+module.exports = roomRouter;

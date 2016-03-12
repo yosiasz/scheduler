@@ -1,8 +1,11 @@
 var cors = require('cors'),
-    express = require('express'),
-    userRouter = express.Router();
+    userRouter = require('express').Router();
+    
      
 var router = function(connection){
+    
+    userRouter.all('*', cors());
+    
     userRouter.route('/')    
     .get(function(req,res){
         connection.query('SELECT userid, username FROM users', req.params.id, function(err, rows, fields) {
@@ -46,7 +49,25 @@ var router = function(connection){
             res.send(rows);
         });
     });
-    
+    userRouter.route('/:username/:password/:email')
+    .post(function(req, res){
+        username = req.body.username;
+        password = req.body.password;
+        email = req.body.email;
+        
+        connection.query('INSERT INTO users(username, password, email) values ("' + username + '", "' + password + '", "' +  email + '")', req.params.id, function(err, rows, fields) {
+                    if (err) {
+                        console.error(err);
+                        res.statusCode = 500;
+                        res.send({
+                            result: 'error',
+                            err:    err.code
+                        });
+                    }
+                   res.json({ message: 'Successfully create user!' });
+                });
+            
+    })    
     userRouter.route('/:userid')
     .delete(function(req, res){
 

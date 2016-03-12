@@ -46,16 +46,16 @@ app.factory('usersFactory', ['$http', function($http) {
         return $http.get(urlBase + '/' + id);
     };
 
-    usersFactory.insertuser = function (harbor) {
-        return $http.post(urlBase, harbor);
+    usersFactory.insertuser = function (user) {
+        return $http.post(urlBase, user);
     };
 
     usersFactory.updateuser = function (harbor) {
-        return $http.put(urlBase + '/' + harbor.harborid, harbor)
+        return $http.put(urlBase + '/' + user.userid, user)
     };
 
-    usersFactory.deleteuser = function (id) {
-        return $http.delete(urlBase + '/' + id);
+    usersFactory.deleteuser = function (useridid) {
+        return $http.delete(urlBase + '/' + userid);
     };
 
     return usersFactory;
@@ -73,12 +73,12 @@ app.factory('personsFactory', ['$http', function($http) {
         return $http.get(urlBase + '/' + id);
     };
 
-    personsFactory.insertperson = function (harbor) {
-        return $http.post(urlBase, harbor);
+    personsFactory.insertperson = function (person) {
+        return $http.post(urlBase, person);
     };
 
-    personsFactory.updateperson = function (harbor) {
-        return $http.put(urlBase + '/' + harbor.harborid, harbor)
+    personsFactory.updateperson = function (person) {
+        return $http.put(urlBase + '/' + person.personid, person)
     };
 
     personsFactory.deleteperson = function (id) {
@@ -124,10 +124,10 @@ app.factory('roomsFactory', ['$http', function($http) {
     };
 
     roomsFactory.getroom = function (id) {
-        return $http.get(urlBase + '/' + id);
+        return $http.get(urlBase, id);
     };
 
-    roomsFactory.createroom = function (room) {
+    roomsFactory.insertroom = function (room) {
         return $http.post(urlBase, room);
     };
 

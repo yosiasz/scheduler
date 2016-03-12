@@ -84,6 +84,7 @@ app.controller('roomsController', ['$scope', 'roomsFactory',
     $scope.status;
     $scope.rooms;
     $scope.room;
+    $scope.newroom;
 
     getrooms();
 
@@ -108,8 +109,8 @@ app.controller('roomsController', ['$scope', 'roomsFactory',
         });
     };               
 
-    $scope.createroom = function () {
-        roomsFactory.createroom($scope.newroom)
+    $scope.insertroom = function () {
+        roomsFactory.insertroom($scope.newroom)
             .success(function () {
                 $scope.status = 'Inserted room! Refreshing room list.';
                 $scope.rooms.push($scope.newroom);
@@ -152,10 +153,11 @@ app.controller('usersController', ['$scope', 'usersFactory',
             });
     } 
 	$scope.insertuser = function () {
-			usersFactory.insertuser($scope.newuser)
+			//usersFactory.insertuser($scope.newuser)
+            usersFactory.insertuser($scope.user)
 				.success(function () {
 					$scope.status = 'Inserted user! Refreshing user list.';
-					$scope.users.push($scope.newuser);
+					$scope.users.push($scope.user);
 				}).
 				error(function(error) {
 					$scope.status = 'Unable to insert perons: ' + error.message;

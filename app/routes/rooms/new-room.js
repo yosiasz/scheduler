@@ -8,18 +8,20 @@ var connection = mysql.createConnection({
 'database' : 'scheduler'
 });
 
-module.exports = function (req, res) {
-    connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
-                if (err) {
-                    console.error(err);
-                    res.statusCode = 500;
-                    res.send({
-                        result: 'error',
-                        err:    err.code
-                    });
-                }
-                res.send(rows);
-            });     
-    };
+module.exports = function(req, res){
+    
+/*connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
+        if (err) {
+            console.error(err);
+            res.statusCode = 500;
+            res.send({
+                result: 'error',
+                err:    err.code
+            });
+        }
+                res.json({ message: 'Successfully added!' });
+    }); */
 
+    res.json( "yayaya" + req.body.roomname )
+};
 

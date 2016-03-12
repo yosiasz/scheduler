@@ -1,10 +1,20 @@
 var cors = require('cors'),
-    roomRouter = require('express').Router();
+    express = require('express'),
+    roomRouter = express.Router();
         
+    mysql = require('mysql');
+
+var connection = mysql.createConnection({
+'host' : 'localhost',
+'port' : '3306',
+'user' : 'scheduler',
+'password' : 'password',
+'database' : 'scheduler'
+});
     
 var router = function(connection){
     
-    roomRouter.all('*', cors());
+    //roomRouter.all('*', cors());
     
     roomRouter.route('/')    
     .get(function(req,res){
@@ -12,12 +22,9 @@ var router = function(connection){
             if (err) {
                 console.error(err);
                 res.statusCode = 500;
-                res.send({
-                    result: 'error',
-                    err:    err.code
-                });
+                res.send(err);
             }
-            res.send(rows);
+            res.send('Hello Rooms');
         });
     });
     roomRouter.route('/:roomid')   

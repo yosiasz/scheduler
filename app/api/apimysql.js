@@ -48,17 +48,27 @@ app.all('*', function(req, res, next) {
 	next();
  });
  
-var roomRoutes = require('../routes/rooms/index.js')(connection);
-var buildingRoutes = require('../routes/buildings/index.js')(connection);
-var personRoutes = require('../routes/persons/personRoutes.js')(connection);
-var userRoutes = require('../routes/persons/userRoutes')(connection);
-var authRoutes = require('../routes/auth/authRoutes.js')(connection);
+var roomRoutes = require('../routes/rooms/index.js');
+var buildingRoutes = require('../routes/buildings/index.js');
+var userRoutes = require('../routes/users/index.js');
+var personRoutes = require('../routes/persons/index.js');
 
+//var authRoutes = require('../routes/auth/index.js')(connection);
+
+/*
+var roomRoutes = require('../routes/rooms/roomRoutes.js');
+var buildingRoutes = require('../routes/buildings/index.js')(connection);
+var userRoutes = require('../routes/users/userRoutes.js');
+var personRoutes = require('../routes/persons/personRoutes.js')(connection);
+var authRoutes = require('../routes/auth/authRoutes.js')(connection);
+*/
 app.use('/Rooms', roomRoutes);
 app.use('/Buildings',buildingRoutes);
-app.use('/Persons', personRoutes);
 app.use('/Users', userRoutes);
-app.use('/Auth', authRoutes);
+app.use('/Persons', personRoutes);
 
+/*
+app.use('/Auth', authRoutes);
+*/
 app.listen(8001);
 console.log('Http Server running at http://localhost:8001');
