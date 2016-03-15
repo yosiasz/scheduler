@@ -4,7 +4,7 @@ var passport = require('passport'),
 module.exports = function() {
     passport.use(new LocalStrategy({
         //from login form
-        usernameField: 'userName',
+        usernameField: 'username',
         passwordField: 'password'
     },
     function(username, password, done){

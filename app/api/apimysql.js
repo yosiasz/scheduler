@@ -1,14 +1,13 @@
 var mysql = require('mysql'), 
     express = require('express'),
+    cookieParser = require('cookie-parser'),
     app = express(), 
     session = require('express-session'), 
     bodyParser = require('body-parser'),
-    passport = require('passport'),
 	util = require('util'), 
 	mysqlconfig = require('../config/configmysql.js'),
-    passportconfig = require('../config/passport.js'),
-    cors = require('cors'),
-    cookieParser = require('cookie-parser')
+    cors = require('cors')
+    
     
  
 // configure app to use bodyParser()
@@ -19,10 +18,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/partials'));
-
-
-app.use(session({
-    secret: 'scheduler',
+//app.use(cookieParser);
+app.use(session({secret: 'scheduler',
     name: 'scheduler',
     //store: sessionStore, // connect-mongo session store
     proxy: true,
@@ -30,7 +27,7 @@ app.use(session({
     saveUninitialized: true
 }));
 
-//app.use(cookieParser);
+require('../config/passport')(app);
 
 var connection = mysql.createConnection({
     host: mysqlconfig.host,
@@ -52,23 +49,14 @@ var roomRoutes = require('../routes/rooms/index.js');
 var buildingRoutes = require('../routes/buildings/index.js');
 var userRoutes = require('../routes/users/index.js');
 var personRoutes = require('../routes/persons/index.js');
+var authRoutes = require('../routes/auth/index.js');
 
-//var authRoutes = require('../routes/auth/index.js')(connection);
-
-/*
-var roomRoutes = require('../routes/rooms/roomRoutes.js');
-var buildingRoutes = require('../routes/buildings/index.js')(connection);
-var userRoutes = require('../routes/users/userRoutes.js');
-var personRoutes = require('../routes/persons/personRoutes.js')(connection);
-var authRoutes = require('../routes/auth/authRoutes.js')(connection);
-*/
 app.use('/Rooms', roomRoutes);
 app.use('/Buildings',buildingRoutes);
 app.use('/Users', userRoutes);
 app.use('/Persons', personRoutes);
-
-/*
 app.use('/Auth', authRoutes);
-*/
+
+
 app.listen(8001);
 console.log('Http Server running at http://localhost:8001');

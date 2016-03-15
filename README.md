@@ -23,7 +23,10 @@ Install the following
 * open a node command console. go to path scheduler node app/services/api.js
     this will run the API
     
-* go to http://localhost:8000/app/Index.html#/        
+* install live-server 
+    npm install live-server
+    
+    from scheduler\app folder run live-server        
 
 Work in Progress
 
@@ -33,3 +36,7 @@ TODO
     use one config file                                             done
     prevents folder traversal when landing on localhost:8000        
     solidify routing
+
+GOTCHAS
+    MySQL at times would wig out with time outs. See the following article on how to manage connection pooling etc
+    https://codeforgeek.com/2015/01/nodejs-mysql-tutorial/    

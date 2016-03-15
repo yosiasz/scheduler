@@ -39,7 +39,7 @@ CREATE  TABLE scheduler.users (
 INSERT INTO scheduler.users
 (username, password, email, createddate, active)
 select 'admin', 'admin', 'admin@scheduler.com', now(), 1 union
-select 'sampleuser', 'sampleuser', 'sampleuser@scheduler.com', now(), 1;
+select "sampleuser", "sampleuser", "sampleuser@scheduler.com", now(), 1;
 #---------------#
 
 DROP TABLE IF EXISTS scheduler.taskcategories;
@@ -167,3 +167,18 @@ select 'Second Hall', now(), 1 union
 select 'Rainier', now(), 1 union
 select 'Mt Shazzam', now(), 1
 ;
+#---------------#
+DROP PROCEDURE IF EXISTS scheduler.users_iud;
+
+DELIMITER //
+CREATE PROCEDURE scheduler.users_iud (in dmlaction varchar(1), in username varchar(45), in pwd varchar(45), in email varchar(100), userid int)
+BEGIN
+	CASE WHEN dmlaction = 'I' THEN
+		INSERT INTO scheduler.users(username,password,email,createddate,active) values (username, pwd, email, now(), 1) ;
+    WHEN dmlaction = 'U' THEN 
+		update scheduler.users set username = '' where userid = userid;
+    ELSE 
+		update scheduler.users set username = '' where userid = userid;
+	END CASE;
+END;
+
