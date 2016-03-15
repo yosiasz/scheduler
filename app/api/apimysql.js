@@ -18,6 +18,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/partials'));
+
+app.use(cors());
+
 //app.use(cookieParser);
 app.use(session({secret: 'scheduler',
     name: 'scheduler',
@@ -34,8 +37,17 @@ var connection = mysql.createConnection({
     user: mysqlconfig.user,
     password : mysqlconfig.password,
 	port : mysqlconfig.port, 
-    database: mysqlconfig.database
+    database: mysqlconfig.database,
+    connectionLimit : 100,
+}, function(err){
+if(!err) {
+    console.log("Database is connected ... nn");    
+} else {
+    console.log("Error connecting database ... nn");    
+}
 });
+
+
 
 var sess;
  

@@ -1,5 +1,8 @@
 {
   "name": "scheduler",
+  "scripts": {
+    "start": "node ./app/api/apimysql.js"    
+  },  
   "dependencies": {
     "body-parser": "^1.14.2",
     "cookie-parser": "^1.4.1",

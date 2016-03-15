@@ -128,7 +128,7 @@ app.factory('roomsFactory', ['$http', function($http) {
     };
 
     roomsFactory.insertroom = function (room) {
-        return $http.post(urlBase, room);
+        return $http.post(urlBase, room.roomname);
     };
 
     roomsFactory.updateroom = function (id) {

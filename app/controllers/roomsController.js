@@ -9,6 +9,14 @@ var connection = mysql.createConnection({
     'database' : 'scheduler'
 });
 
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... nn");    
+} else {
+    console.log("Error connecting database ... nn");    
+}
+});
+
 var roomController = function () {
     var middleware = function (req, res, next) {
         res.send('Middleware!');
@@ -59,7 +67,13 @@ var roomController = function () {
         };   
 
     var createRoom = function (req, res) {
-        connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
+        
+
+        var roomname = mysql.escape(req.body.roomname);
+        var dt = new Date();            
+        var createddate = mysql.escape(dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate());
+        var query = 'INSERT INTO rooms(roomname, createddate, active) values (' + roomname +  ',' + createddate + ', 1 ' + ')';
+        connection.query(query, req.params.id, function(err, rows, fields) {
                 if (err) {
                     console.error(err);
                     res.statusCode = 500;
@@ -68,7 +82,9 @@ var roomController = function () {
                         err:    err.code
                     });
                 }
-                res.send('Room created!');
+                if (!err) {
+                    res.send('Room created!');
+                }
             });
         };   
                     

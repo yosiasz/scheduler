@@ -10,18 +10,22 @@ var connection = mysql.createConnection({
 
 module.exports = function(req, res){
     
-connection.query('INSERT INTO rooms(roomname) values ("' + req.body.roomname + '")', req.params.id, function(err, rows, fields) {
-        if (err) {
-            console.error(err);
-            res.statusCode = 500;
-            res.send({
-                result: 'error',
-                err:    err.code
-            });
-        }
-                res.json({ message: 'Successfully added!' });
-    });
-
-    res.json( "yayaya" + req.body.roomname )
+        roomname = mysql.escape(req.body.roomname);
+        var dt = new Date();            
+        createddate = mysql.escape(dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate());
+        query = 'INSERT INTO rooms(roomname, createdate, active) values (' + roomname +  ',' + createddate + ', 1 ' + ')';
+        /*
+        connection.query(query, req.params.id, function(err, rows, fields) {
+                if (err) {
+                    console.error(err);
+                    res.statusCode = 500;
+                    res.send({
+                        result: 'error',
+                        err:    err.code
+                    });
+                }
+                res.send('Room created!');
+            });*/
+            res.send(query);
 };
 

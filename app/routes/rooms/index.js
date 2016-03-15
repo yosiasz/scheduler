@@ -15,6 +15,8 @@ roomRouter.all('*', cors());
 roomRouter.route('/:roomname')
     .post(roomsController.createRoom);
 
+//roomRouter.post('/:roomname', require('./new-room.js'));  
+
 roomRouter.route('/')
     .get(roomsController.getRooms);
 
@@ -27,7 +29,7 @@ roomRouter.route('/:roomid')
 
 /*roomRouter.get('/', require('./get-rooms.js')); 
 roomRouter.get('/:roomid', require('./get-room.js')); 
-roomRouter.post('/:roomname', require('./new-room.js'));  
+
 roomRouter.delete('/:roomid', require('./delete-room.js')); 
 */
 module.exports = roomRouter;
